@@ -103,3 +103,7 @@ header .container {
     transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
     background: #ebb93b;
     background: linear-gradient(0deg, rgba(227, 186, 104, 0.376) 0%, rgba(53, 45, 18, 0.643) 100%); }
+
+footer {
+  -webkit-box-shadow: 1px 0px 20px 3px rgba(0, 0, 0, 0.22);
+  box-shadow: 1px 0px 20px 3px rgba(0, 0, 0, 0.22); }
