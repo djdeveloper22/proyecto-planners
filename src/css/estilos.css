@@ -9,7 +9,7 @@ header {
   position: relative;
   background-color: black;
   background-image: url("/src/assets/img/planners.jpg");
-  height: 100vh;
+  height: auto;
   min-height: 25rem;
   width: 100%;
   overflow: hidden; }
