@@ -2,22 +2,51 @@
 body {
   font-family: "Open Sans", sans-serif;
   height: 100vh;
-  width: 100%;
-  
-  
+  width: 100%; 
 }
+
+iframe{
+  width: 100%;
+  height: 22rem;
+}
+
+i{
+  margin-right: 0.3rem;
+}
+
+a, i{
+  text-decoration: none;
+  color: #ddc5b0;
+  font-size: 18px;
+  &:hover{
+    transition: all 0.4s ease;
+    color: #adaaaae9;
+  }
+}
+
+li{
+  list-style: none;
+}
+
 img {
   object-fit: cover;
 }
+
+h1{
+  color: #f4e7da;
+  font-weight: 400;
+}
+
 header {
   position: relative;
   background-color: rgb(0, 0, 0);
   background-image: url("/src/assets/img/planners.jpg");
-  height: auto;
+  height: 100%;
   min-height: 25rem;
   width: 100%;
   overflow: hidden;
 }
+
 header .overlay {
   position: absolute;
   top: 0;
@@ -27,6 +56,7 @@ header .overlay {
   background-color: rgba(0, 0, 0, 0.729);
   z-index: 1;
 }
+
 header video {
   position: absolute;
   top: 50%;
@@ -42,10 +72,34 @@ header video {
   transform: translateX(-50%) translateY(-50%);
 }
 
+.header nav{
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  
+}
+
 header .container {
   position: relative;
   z-index: 2;
 }
+
+.logo-header{
+  width: 100px;
+  height: 100px;
+}
+.logo-header img{
+  width: 100%;
+}
+
+.text-start{
+  font-size: 20px;
+}
+
+.container__text{
+  height: 90vh;
+}
+
 
 //card-----------------
 .wrapper {

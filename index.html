@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Proyecto Planners</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- CSS only -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
@@ -23,13 +24,13 @@
     />
   </head>
   <body>
-    <div class="loader">
+    <!-- <div class="loader">
       <figure class="loader__img">
         <img src="./src/assets/img/ap_studies.PNG" alt="logo">
       </figure>
       <div class="loader-wheel"></div>
       <div class="loader-text"></div>
-    </div>
+    </div> -->
   </div>
     <div id="app" class="contaniner-app">
       <header>
@@ -44,17 +45,28 @@
         </video>
         <!-- The header content -->
         <div class="container h-100">
-          <div class="d-flex h-100 text-center align-items-center">
+          <div class="header row">
+            <div class="col">
+              <figure class="logo-header">
+                <img src="./src/assets/img/ap_studies.PNG" alt="">
+              </figure>
+            </div>
+            <div class="col">
+              <nav>
+                <ul class="mt-4">
+                  <li><i class="bi bi-envelope-fill"></i><a href="google.com">Contacto</a></li>
+                </ul>
+              </nav>
+
+            </div>
+          </div>
+          <div class="d-flex container__text text-center align-items-center">
             <div class="w-100 text-white">
-              <div class="row justify-content-center align-items-center pt-5">
+              <div class="row justify-content-center align-items-center">
                 <div class="col-12 col-md-7 col-lg-7 text-center wow animate__animated animate__bounceInLeft">
-                  <h1 class="display-3">The Best Digital Planners for iPad</h1>
+                  <h1 class="display-2">The Best Digital Planners</h1>
                   <p class="text-start">
-                    For creatives, mothers, and Online business owners to find a
-                    simple solution that is designed to help you organize your
-                    life. Our stunning digital Planners are designed to work
-                    perfectly with the Goodnotes app, Notability app, Noteshelf
-                    2, Zoomnotes, and Xodo.
+                    La motivación es lo que te hace comenzar. Los hábitos son los que te mantienen en el camino. Cambia tu manera de planificarte con nuestras agendas digitales enfocadas en productividad.
                   </p>
                 </div>
                 <div class="col-12 col-md-5 col-lg-5 wow animate__animated animate__bounceInRight">
@@ -99,6 +111,7 @@
           </div>
         </div>
       </header>
+
       <main>
         <section class="wrapper">
           <div class="container">
@@ -106,14 +119,23 @@
               <div
                 class="col wow animate__animated animate__slideInUp text-center mb-5"
               >
-                <h1 class="display-4">Dated 2022 Digital Planners</h1>
-                <p class="lead">
-                  Lorem ipsum dolor sit amet at enim hac integer volutpat
-                  maecenas pulvinar.
+                <h3 class="display-5">Dated 2022 Digital Planners</h2>
+                <p class="lead fs-3">
+                  Todos tenemos esperanzas, sueños y aspiraciones en la vida. La planificación puede servir como hoja de ruta o guía para hacer realidad esos sueños.
                 </p>
               </div>
             </div>
+            <div class="row pt-5 pb-5 mt-3 mb-3">
+              <div class="col-12 col-md-6 text-center wow animate__animated animate__bounceInLeft">
+                <iframe src="https://www.youtube.com/embed/fQaZXuYzKEY?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+              <div class="col-12 col-md-6 text-center wow animate__animated animate__bounceInRight">
+                <h2>¿Qué es una agenda digital?</h2>
+                <p style="font-size: 20px; text-align: justify;">Son versiones digitales de una agenda de papel tradicional pero con un toque único. En formato PDF interactivo puedes moverte a cualquier día, semana o mes con un solo clic. Estas agendas digitales imitan la apariencia de una agenda tradicional. ¡Estos documentos PDF se pueden importar a su aplicación favorita para tomar notas y llevar su agenda dondequiera que vaya! puedes personalizar tus apuntes con los stickers que traen. exportarlo como PDF para usarlo con su aplicación de notas.</p>
+              </div>
+            </div>
             <div class="row">
+              <h2 class="display-4 text-center mt-5 pb-5">Nuestras Agendas Digitales</h2>
               <div
                 class="wow animate__animated animate__slideInUp col-sm-12 col-md-6 col-lg-4 mb-4"
               >
@@ -378,7 +400,7 @@
           </div>
         </section>
       </main>
-      <!-- Footer -->
+      
       <footer class="text-center text-lg-start bg-white text-muted">
         <!-- Section: Social media -->
         <section
@@ -427,9 +449,9 @@
               <!-- Grid column -->
               <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                 <!-- Content -->
-                <h6 class="text-uppercase fw-bold mb-4">
-                  <i class="fas fa-gem me-3 text-secondary"></i>Company name
-                </h6>
+               <figure class="logo-header">
+                <img src="./src/assets/img/ap_studies.PNG" alt="">
+              </figure>
                 <p>
                   Here you can use rows and columns to organize your footer
                   content. Lorem ipsum dolor sit amet, consectetur adipisicing
@@ -509,15 +531,14 @@
           class="text-center p-4"
           style="background-color: rgba(0, 0, 0, 0.025)"
         >
-          © 2021 Copyright:
-          <a class="text-reset fw-bold" href="https://mdbootstrap.com/"
-            >MDBootstrap.com</a
+          © 2022 Copyright:
+          <a class="text-reset fw-bold" href="https://pimepanama.com/"
+            >pimepanama</a
           >
         </div>
         <!-- Copyright -->
       </footer>
-      <!-- Footer -->
-    <!-- JavaScript Bundle with Popper -->
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
