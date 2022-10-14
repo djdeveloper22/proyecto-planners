@@ -2,7 +2,6 @@
 body {
   font-family: "Open Sans", sans-serif;
   width: 100%;
-  
 }
 
 iframe {
@@ -37,6 +36,22 @@ img {
 h1 {
   color: #f4e7da;
   font-weight: 400;
+}
+
+.cart-nav {
+  position: fixed;
+  height: 100%;
+  width: 375px;
+  right: -375px;
+  top: 0;
+  background-color: #fff;
+  z-index: 3;
+  transition: 0.2s;
+}
+
+.bi-x-lg{
+  color: #09311e;
+  font-size: 28px;
 }
 
 header {
@@ -74,14 +89,14 @@ header video {
   transform: translateX(-50%) translateY(-50%);
 }
 
-.header{
-  .header__cart-li{
+.header {
+  .header__cart-li {
     padding: 0.4rem;
     margin-left: 0.4rem;
     border: 1px solid #ddc5b0;
     color: #ddc5b0;
 
-    &.header__cart-li span{
+    &.header__cart-li span {
       border-left: 1px solid #ddc5b0;
       padding-left: 0.4rem;
     }
@@ -99,6 +114,17 @@ header .container {
   z-index: 2;
 }
 
+.spacing-carrito{
+  margin-left: 1rem;
+  a{
+    background-color: #25d366;
+    color: white;
+    i{
+      color: white;
+    }
+  }
+}
+
 .logo-header {
   width: 100px;
   height: 100px;
@@ -114,12 +140,11 @@ header .container {
   height: 80vh;
 }
 
-@media (max-width:868px) {
+@media (max-width: 868px) {
   .container__text {
     height: auto;
     padding-bottom: 4rem;
   }
-  
 }
 
 //card-----------------
@@ -221,7 +246,7 @@ footer {
 }
 
 //estilos boton whatsapp
-.container__btn-whatsapp{
+.container__btn-whatsapp {
   background-color: #25d366;
   border-radius: 50%;
   width: 60px;
@@ -234,37 +259,65 @@ footer {
   right: 1rem;
   z-index: 4;
   border: solid 2px #09311e;
-  .fa-whatsapp{
+  .fa-whatsapp {
     color: #fff;
     font-size: 2rem;
     margin-left: 0.2rem;
   }
-  
+}
+
+.container__btn-whatsapp {
+  color: #fff;
+  -webkit-animation: pulse 1.5s infinite;
+}
+@-webkit-keyframes pulse {
+  0% {
+    -moz-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+
+  70% {
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    box-shadow: 0 0 0 50px rgba(90, 153, 212, 0);
+  }
+
+  100% {
+    -moz-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+    box-shadow: 0 0 0 0 rgba(90, 153, 212, 0);
+  }
 }
 
 //modal
-.modal-content--content{
+.modal-content--content {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #efefef;
 }
 
-.modal-producto{
- height: 50vh;
+.modal-producto {
+  height: 50vh;
 }
 
-.modal-title{
+.modal-title {
   color: rgb(12, 12, 12);
 }
 
-.bg-sale{
+.bg-sale {
   background-color: #25d366;
   color: #fff;
   width: 3rem;
 }
 
-.btn-carrito{
+.btn-carrito {
   background-color: rgb(54, 54, 254);
   padding: 0.7rem;
   color: whitesmoke;

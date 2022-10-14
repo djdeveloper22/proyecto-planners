@@ -26,6 +26,20 @@
   <body>
   </div>
     <div id="app" class="contaniner-app">
+      <!-- seccion productos carrito -->
+      <div class="cart-nav" id="contenedor__productos"><!--v-if-->
+        <div class="cart-items d-flex flex-column p-3">
+          <div class="d-flex justify-content-between">
+            <h3>Carrito</h3><i style="cursor: pointer;" class="bi bi-x-lg" id="cerrar"></i>
+          </div><hr>
+          <div class="d-flex flex-column text-center">
+            <div class="mb-3">
+              <img src="./src/assets/img/Add to Cart-amico.d0a5b521.svg" class="img-fluid imageResizerChangedClass" style="width: 190.631px; height: 190.631px; position: relative;" width="inherit" height="inherit">
+            </div><h5 class="text-black-50">Tu carrito esta vacio</h5>
+          </div>
+        </div>
+      </div>
+      <!-- /seccion productos carrito -->
       <header>
         <div class="overlay"></div>
         <video
@@ -48,7 +62,7 @@
               <nav>
                 <ul class="mt-4 d-flex justify-content-center align-items-center">
                   <li><i class="bi bi-envelope-fill"></i><a href="google.com">Contacto</a></li>
-                  <li class="header__cart-li"> <a href="">CART <span id="contadorCart">0</span></a> </li>
+                  <li class="spacing-carrito" id="carrito"><a style="cursor: pointer;" class="nav-link fw-bold position-relative btn btn-success p-1"> Carrito <i class="bi bi-cart4"></i><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="contadorCart">0 <span class="visually-hidden">unread messages</span></span></a></li>
                 </ul>
               </nav>
             </div>
@@ -698,7 +712,7 @@
 
       <!-- boton whatsapp -->
       <div class="container__btn-whatsapp">
-        <a href="https://api.whatsapp.com/send?phone=51955081075&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Varela%202." target="_blank">
+        <a href="https://api.whatsapp.com/send?phone=51955081075&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Varela%202." target="_blank" class="efecto-btn">
           <i class="fa fa-whatsapp"></i>
         </a>
       </div>
