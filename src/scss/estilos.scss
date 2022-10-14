@@ -48,10 +48,19 @@ h1 {
   z-index: 3;
   transition: 0.2s;
 }
+.cart-nav.toggled{
+  right: 0;
+}
 
 .bi-x-lg{
   color: #09311e;
   font-size: 28px;
+}
+
+.productosCarrito{
+  border-bottom: 1px solid #cfcf;
+  height: 42vh;
+  overflow: auto;
 }
 
 header {

@@ -21,21 +21,33 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
+    <script src="https://unpkg.com/vue@3"></script>
   </head>
   <body>
   </div>
     <div id="app" class="contaniner-app">
       <!-- seccion productos carrito -->
-      <div class="cart-nav" id="contenedor__productos"><!--v-if-->
+      <div class="cart-nav" id="contenedor__productos" :class="toggled == true ? 'toggled':'' "><!--v-if-->
         <div class="cart-items d-flex flex-column p-3">
           <div class="d-flex justify-content-between">
-            <h3>Carrito</h3><i style="cursor: pointer;" class="bi bi-x-lg" id="cerrar"></i>
+            <h3>Carrito</h3><i style="cursor: pointer;" class="bi bi-x-lg" id="cerrar" @click="toggled = false"></i>
           </div><hr>
-          <div class="d-flex flex-column text-center">
+          <div class="d-flex flex-column text-center productosCarrito">
+            <div class="d-flex justify-content-around align-items-start pt-1 pb-1" v-for="product in cart" :key='product'>
+              <span class="fs-6 p-1">{{product.title}}</span>
+              <div class="d-flex  w-25">
+                <span class="p-1">$ {{product.price}}</span>
+                <i class="bi bi-x-circle-fill fs-5"></i>
+              </div>
+            </div>
             <div class="mb-3">
-              <img src="./src/assets/img/Add to Cart-amico.d0a5b521.svg" class="img-fluid imageResizerChangedClass" style="width: 190.631px; height: 190.631px; position: relative;" width="inherit" height="inherit">
-            </div><h5 class="text-black-50">Tu carrito esta vacio</h5>
+              <div v-if="cart.length == 0">
+                <img src="./src/assets/img/Add to Cart-amico.d0a5b521.svg" class="img-fluid imageResizerChangedClass" style="width: 190.631px; height: 190.631px; position: relative;" width="inherit" height="inherit">
+                <h5 class="text-black-50">Tu carrito esta vacio</h5>
+              </div>
+            </div>
           </div>
+          <div class="d-flex flex-column  border-top pt-3"><div class="d-flex justify-content-between"><div class="my-auto"><h1 class="fw-normal">Total</h1></div><div><h6 class="my-auto fw-light pb-2">Sub total <span>$ valor </span> </h6><h6 class="my-auto fw-light pb-2">ITBMS $10.50</h6><h3 class="my-auto fw-bold">valorTotal</h3></div></div><button class="btn btn-warning my-3 py-2 v-if"> Ir a checkout</button></div>
         </div>
       </div>
       <!-- /seccion productos carrito -->
@@ -61,7 +73,7 @@
               <nav>
                 <ul class="mt-4 d-flex justify-content-center align-items-center">
                   <li><i class="bi bi-envelope-fill"></i><a href="google.com">Contacto</a></li>
-                  <li class="spacing-carrito" id="carrito"><a style="cursor: pointer;" class="nav-link fw-bold position-relative btn btn-success p-1"> Carrito <i class="bi bi-cart4"></i><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="contadorCart">0 <span class="visually-hidden">unread messages</span></span></a></li>
+                  <li class="spacing-carrito" id="carrito"><a @click="toggled = true" style="cursor: pointer;" class="nav-link fw-bold position-relative btn btn-success p-1"> Carrito <i class="bi bi-cart4"></i><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="contadorCart">{{cart.length}}<span class="visually-hidden">unread messages</span></span></a></li>
                 </ul>
               </nav>
             </div>
@@ -157,29 +169,32 @@
                   <div class="card-body">
                     <small class="card-meta mb-2">SALE</small>
                     <h4 class="card-title mt-0">
-                      <a class="text-white" herf="#"></a>
+                      <a class="text-white" herf="#">{{product.title}}</a>
                     </h4>
-                    <small><i class="far fa-clock"></i> $19.00 </small>
+                    <small><i class="far fa-clock"></i> {{product.price.toLocaleString("en-us", {
+                      style: "currency",
+                      currency: "usd",
+                    })}} </small>
                   </div>
                   <div class="card-footer">
                     <div class="media">
                       <img
                         class="mr-3 rounded-circle"
-                        src="./src/assets/img/ap_studies.PNG"
+                        src="'./src/assets/img/ap_studies.PNG'"
                         alt="Generic placeholder image"
                         style="max-width: 50px"
                       />
                       <div class="media-body">
-                        <h6 class="my-0 text-white d-block">Kira Distri</h6>
-                        <small>Directora Planners</small>
+                        <h6 class="my-0 text-white d-block">{{product.seo}}</h6>
+                        <small>{{product.lider}}}</small>
                       </div>
                     </div>
                   </div>
                   <button class="bg-light border-0 p-1" data-bs-toggle="modal" data-bs-target="#exampleModal">Ver producto</button>
+                  <button class="bg-light border-0 p-1" @click="addToCart(product)">Agregar al Carrito</button>
                 </div>
               </div>
-            </div>
-            <!-- Modal -->
+              <!-- Modal -->
             <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-lg modal-content--content">
                 <div class="modal-content ">
@@ -192,15 +207,17 @@
                     <div class="row">
                       <div class="col-12 col-md-6 col-lg-6">
                         <figure>
-                          <img src="./src/assets/img/img2-carrito.webp" alt="producto digital">
+                          <img src="./src/assets/img/ap_studies.PNG" alt="producto digital">
                         </figure>
                       </div>
                       <div class="col-12 col-md-6 col-lg-6 d-flex flex-column p-4 justify-content-between">
                         <small class="bg-sale p-1 fs-6 mb-1">SALE</small>
-                        <h3>Nombre del producto</h3>
-                        <small class="mb-2">$119 - <span>$99</span></small>
+                        <h3>{{product.title}}</h3>
+                        <div class="d-flex">
+                          <small class="mb-2" :class="product.descuento !== ''? 'text-decoration-line-through':''">$119 - </small><span v-if="product.descuento !== ''">{{product.descuento}}</span>
+                        </div>
                         <p>Aqui va la descripcion del producto Lorem. Labore quasi aperiam aut minima quo. Soluta ea recusandae ex veniam laborum adipisci ipsa quibusdam, dolore culpa, temporibus impedit nemo alias non!</p>
-                        <a class="btn-carrito" id="btnCarrito" href="#">Add To Cart</a>
+                        <button class="btn-carrito" id="btnCarrito" href="#" @click="addToCart(product)">Add To Cart</button>
                       </div>
                     </div>
                     
@@ -209,6 +226,8 @@
               </div>
             </div>
             <!-- modal -->
+            </div>
+            
           </div>
         </section>
       </main>
@@ -349,75 +368,92 @@
         </a>
       </div>
 
-    <script src="./main.js"></script> 
-    
     <script src="./src/WOW.js"></script>
     <script>
       new WOW().init();
     </script>
-  <script src="https://unpkg.com/vue@3"></script>
     <script>
         Vue.createApp({
           data() {
             return {
+              toggled:false,
               products:[
               {
                 id: "1",
-                nombre: "2022 Creative Digital Planner",
-                precio: "$19.00 Original Price:$29.00",
+                title: "2022 Creative Digital Planner",
+                qty: 1,
+                price: 4.99,
+                descuento: '119',
                 descripcion:
                   "Aqui va la descripcion del producto Lorem. Labore quasi aperiam aut minima quo. Soluta ea recusandae ex veniam laborum adipisci ipsa quibusdam, dolore culpa, temporibus impedit nemo alias non!",
-                logo: "./src/assets/img/ap_studies.PNG",
+                logo:{
+                  avatar:'./src/assets/img/ap_studies.PNG'
+                }, 
+                imgProducto: '',
                 seo: "Kira Distri",
                 lider: "Directora Planners",
               },
               {
                 id: "2",
-                nombre: "2022 Mom Life Digital Planner",
-                precio: "$19.00 Original Price:$29.00",
+                title: "2022 Mom Life Digital Planner",
+                qty: 1,
+                price: 4.99,
+                descuento: '',
                 descripcion:
                   "Aqui va la descripcion del producto Lorem. Labore quasi aperiam aut minima quo. Soluta ea recusandae ex veniam laborum adipisci ipsa quibusdam, dolore culpa, temporibus impedit nemo alias non!",
                 logo: "./src/assets/img/ap_studies.PNG",
+                imgProducto: '',
                 seo: "Kira Distri",
                 lider: "Directora Planners",
               },
               {
                 id: "3",
-                nombre: "2022 Mompreneur Planner",
-                precio: "$19.00 Original Price:$29.00",
+                title: "2022 Mompreneur Planner",
+                qty: 1,
+                price: 4.99,
+                descuento: '120',
                 descripcion:
                   "Aqui va la descripcion del producto Lorem. Labore quasi aperiam aut minima quo. Soluta ea recusandae ex veniam laborum adipisci ipsa quibusdam, dolore culpa, temporibus impedit nemo alias non!",
                 logo: "./src/assets/img/ap_studies.PNG",
+                imgProducto: '',
                 seo: "Kira Distri",
                 lider: "Directora Planners",
               },
               {
                 id: "4",
-                nombre: "Bundle - 2022 Mom Life Digital Planner",
-                precio: "$46.00 Original Price:$66.00",
+                title: "2022 Mom Life Digital Planner",
+                qty: 1,
+                price: 4.99,
+                descuento: '',
                 descripcion:
                   "Aqui va la descripcion del producto Lorem. Labore quasi aperiam aut minima quo. Soluta ea recusandae ex veniam laborum adipisci ipsa quibusdam, dolore culpa, temporibus impedit nemo alias non!",
                 logo: "./src/assets/img/ap_studies.PNG",
+                imgProducto: '',
                 seo: "Kira Distri",
                 lider: "Directora Planners",
               },
               {
                 id: "5",
-                nombre: "Bundle - 2022 Creative Digital Planner",
-                precio: "$47.00 Original Price:$63.00",
+                title: "Creative Digital Planner",
+                qty: 1,
+                price: 4.99,
+                descuento: '119',
                 descripcion:
                   "Aqui va la descripcion del producto Lorem. Labore quasi aperiam aut minima quo. Soluta ea recusandae ex veniam laborum adipisci ipsa quibusdam, dolore culpa, temporibus impedit nemo alias non!",
                 logo: "./src/assets/img/ap_studies.PNG",
+                imgProducto: 'https://i0.wp.com/craftingeek.me/wp-content/uploads/2022/07/pd-001-libreta-digital-blog-8.png?resize=2000%2C1600&ssl=1',
                 seo: "Kira Distri",
                 lider: "Directora Planners",
               },
               {
                 id: "6",
-                nombre: "Sticker Book No.6",
-                precio: "$19.00",
-                descripcion:
-                  "Aqui va la descripcion del producto Lorem. Labore quasi aperiam aut minima quo. Soluta ea recusandae ex veniam laborum adipisci ipsa quibusdam, dolore culpa, temporibus impedit nemo alias non!",
+                title: "Sticker Book No.6",
+                qty:1,
+                price: 4.99,
+                descuento: '',
+                descripcion:"Aqui va la descripcion del producto Lorem. Labore quasi aperiam aut minima quo. Soluta ea recusandae ex veniam laborum adipisci ipsa quibusdam, dolore culpa, temporibus impedit nemo alias non!",
                 logo: "./src/assets/img/ap_studies.PNG",
+                imgProducto: '',
                 seo: "Kira Distri",
                 lider: "Directora Planners",
               },
@@ -425,12 +461,14 @@
               ],
               cart:[],
               total:0,
+              
             }
           },
           methods:{
             addToCart(item) {
               this.cart.push(item);
               this.getTotal();
+              
             },
             removeFromCart(index) {
               this.cart.splice(index, 1);
@@ -443,8 +481,8 @@
             },
           },
           async mounted(){
-
-          }})
+            
+          }}).mount("#app")
     </script>
     <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
