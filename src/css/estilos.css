@@ -121,6 +121,9 @@ header .container {
     height: auto;
     padding-bottom: 4rem; } }
 
+.container-flex {
+  display: flex; }
+
 .wrapper {
   margin: 10vh; }
 
