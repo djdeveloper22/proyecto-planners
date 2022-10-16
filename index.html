@@ -190,8 +190,10 @@
                       </div>
                     </div>
                   </div>
-                  <button class="bg-light border-0 p-1" data-bs-toggle="modal" data-bs-target="#exampleModal">Ver producto</button>
-                  <button class="bg-light border-0 p-1" @click="addToCart(product)">Agregar al Carrito</button>
+                  <div class="contenedor-btn-card d-flex">
+                    <button class="bg-light border-0 p-2 m-1 rounded-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Ver producto</button>
+                    <button class="bg-light border-0 p-2 m-1 rounded-3" @click="addToCart(product)">Agregar al Carrito</button>
+                  </div>
                 </div>
               </div>
               <!-- Modal -->

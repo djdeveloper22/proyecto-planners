@@ -253,6 +253,12 @@ header .container {
   }
 }
 
+.contenedor-btn-card > button{
+  background: rgb(244,231,218);
+  background: linear-gradient(352deg, rgba(244,231,218,1) 0%, rgba(199,166,138,1) 51%, rgba(244,231,218,1) 100%);
+  color: #080808;
+}
+
 footer {
   -webkit-box-shadow: 1px 0px 20px 3px rgba(0, 0, 0, 0.22);
   box-shadow: 1px 0px 20px 3px rgba(0, 0, 0, 0.22);

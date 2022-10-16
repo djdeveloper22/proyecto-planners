@@ -195,6 +195,11 @@ header .container {
     background: #ebb93b;
     background: linear-gradient(0deg, rgba(227, 186, 104, 0.376) 0%, rgba(53, 45, 18, 0.643) 100%); }
 
+.contenedor-btn-card > button {
+  background: #f4e7da;
+  background: linear-gradient(352deg, #f4e7da 0%, #c7a68a 51%, #f4e7da 100%);
+  color: #080808; }
+
 footer {
   -webkit-box-shadow: 1px 0px 20px 3px rgba(0, 0, 0, 0.22);
   box-shadow: 1px 0px 20px 3px rgba(0, 0, 0, 0.22); }
