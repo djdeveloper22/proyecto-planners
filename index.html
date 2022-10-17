@@ -26,6 +26,10 @@
   <body>
     
     <div id="app" class="contaniner-app">
+      <!-- seccion aviso agreando producto -->
+      <div class="msj-producto hide alert alert-primary">
+        Producto agregado
+      </div>
       <!-- seccion productos carrito -->
       <div class="cart-nav" id="contenedor__productos" :class="toggled == true ? 'toggled':'' "><!--v-if-->
         <div class="cart-items d-flex flex-column p-3">
@@ -34,20 +38,32 @@
           </div><hr>
           <div class="d-flex flex-column text-center productosCarrito">
             <div class="d-flex justify-content-around align-items-start pt-1 pb-1" v-for="product in cart" :key='product'>
-              <span class="fs-6 p-1">{{product.title}}</span>
+              <span class="fs-6 p-1">${{product.title}}</span>
               <div class="d-flex  w-25">
-                <span class="p-1">$ {{product.price}}</span>
+                <span class="p-1">total {{product.price.toLocaleString("en-us", {
+                  style: "currency",
+                  currency: "usd",
+                })}}</span>
                 <i class="bi bi-x-circle-fill fs-5"></i>
               </div>
             </div>
             <div class="mb-3">
-              <div v-if="cart.length == 0">
+              <div v-if="cart.length < 1">
                 <img src="./src/assets/img/Add to Cart-amico.d0a5b521.svg" class="img-fluid imageResizerChangedClass" style="width: 190.631px; height: 190.631px; position: relative;" width="inherit" height="inherit">
                 <h5 class="text-black-50">Tu carrito esta vacio</h5>
               </div>
             </div>
           </div>
-          <div class="d-flex flex-column  border-top pt-3"><div class="d-flex justify-content-between"><div class="my-auto"><h1 class="fw-normal">Total</h1></div><div><h6 class="my-auto fw-light pb-2">Sub total <span>$ valor </span> </h6><h6 class="my-auto fw-light pb-2">ITBMS $10.50</h6><h3 class="my-auto fw-bold">valorTotal</h3></div></div><button class="btn btn-warning my-3 py-2 v-if"> Ir a checkout</button></div>
+          <div class="d-flex flex-column  border-top pt-3">
+            <div class="d-flex justify-content-between">
+              <div class="my-auto">
+                <h1 class="fw-normal">Total</h1></div><div>
+                <h6 class="my-auto fw-light pb-2" >Sub total: <span>{{getTotal()}}</span> </h6>
+                <h6 class="my-auto fw-light pb-2">ITBMS $10.50</h6>
+                <h3 class="my-auto fw-bold">valorTotal</h3>
+              </div>
+            </div>
+            <button class="btn btn-warning my-3 py-2 v-if"> Ir a checkout</button></div>
         </div>
       </div>
       <!-- /seccion productos carrito -->
@@ -63,21 +79,24 @@
         </video>
         <!-- The header content -->
         <div class="container d-flex flex-column w-100 h-100">
-          <div class="header row">
-            <div class="col">
+          <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
               <figure class="logo-header">
                 <img src="./src/assets/img/ap_studies.PNG" alt="">
               </figure>
-            </div>
-            <div class="col">
-              <nav>
-                <ul class="mt-4 d-flex justify-content-center align-items-center">
-                  <li><i class="bi bi-envelope-fill"></i><a href="google.com">Contacto</a></li>
+              <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                  <li class="nav-item">
+                    <li><i class="bi bi-envelope-fill"></i><a href="google.com">Contacto</a></li>
+                  </li>
                   <li class="spacing-carrito" id="carrito"><a @click="toggled = true" style="cursor: pointer;" class="nav-link fw-bold position-relative btn btn-success p-1"> Carrito <i class="bi bi-cart4"></i><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="contadorCart">{{cart.length}}<span class="visually-hidden">unread messages</span></span></a></li>
                 </ul>
-              </nav>
+              </div>
             </div>
-          </div>
+          </nav>
           <div class="container__text text-center align-items-center mt-5">
             <div class="w-100 text-white">
               <div class="row justify-content-center align-items-center">
@@ -97,7 +116,7 @@
                       <div class="carousel-item active">
                         <figure class="img-slider-figure">
                           <img
-                          src="./src/assets/img/splanner1.png"
+                          src="./src/assets/img/imgProdcuto.jpeg"
                           class="d-block w-100 rounded"
                           alt="..."
                           />
@@ -107,7 +126,7 @@
                         <figure class="img-slider-figure">
                           <img
                           src="./src/assets/img/splanner2.png"
-                          class="d-block w-100 rounded"
+                          class="d-block w-100 rounded-2"
                           alt="..."
                           />
                         </figure>
@@ -149,90 +168,71 @@
               <p style="font-size: 20px; text-align: justify;">Son versiones digitales de una agenda de papel tradicional pero con un toque único. En formato PDF interactivo puedes moverte a cualquier día, semana o mes con un solo clic. Estas agendas digitales imitan la apariencia de una agenda tradicional. ¡Estos documentos PDF se pueden importar a su aplicación favorita para tomar notas y llevar su agenda dondequiera que vaya! puedes personalizar tus apuntes con los stickers que traen. exportarlo como PDF para usarlo con su aplicación de notas.</p>
             </div>
           </div>
-          <div class="row container__card">
-            <h2 class="display-4 text-center mt-5 pb-5 wow animate__animated animate__fadeInUp">Nuestras Agendas Digitales</h2>
-            <div
-             class="wow animate__animated animate__slideInRight col-sm-12 col-md-6 col-lg-4 mb-4" v-for="product in products" :key='product'  
-            >
-              <div
-                class="card text-white card-has-bg click-col"
-                style=" 
-                  background-image: url('./src/assets/img/splanner6.png');
-                "
-              >
-                <img
-                  class="card-img d-none"
-                  src="https://source.unsplash.com/600x900/?computer,design"
-                  alt="Goverment Lorem Ipsum Sit Amet Consectetur dipisi?"
-                />
-                <div class="card-img-overlay d-flex flex-column">
-                  <div class="card-body">
-                    <small class="card-meta mb-2">SALE</small>
-                    <h4 class="card-title mt-0">
-                      <a class="text-white" herf="#">{{product.title}}</a>
-                    </h4>
-                    <small><i class="far fa-clock"></i> {{product.price.toLocaleString("en-us", {
-                      style: "currency",
-                      currency: "usd",
-                    })}} </small>
-                  </div>
-                  <div class="card-footer">
-                    <div class="media">
-                      <img
-                        class="mr-3 rounded-circle"
-                        src="./src/assets/img/ap_studies.PNG"
-                        alt="Generic placeholder image"
-                        style="max-width: 50px"
-                      />
-                      <div class="media-body">
-                        <h6 class="my-0 text-white d-block">{{product.seo}}</h6>
-                        <small>{{product.lider}}}</small>
+          <div class="row">
+            <h2 class="display-4 text-center mt-5 pb-3 wow animate__animated animate__fadeInUp">Nuestras Agendas Digitales</h2>
+            <div class="container__card" >
+              <div class="bg-image wow animate__animated animate__fadeInUp  rounded-4" v-for="product in products" :key="product">
+                <div class="miCard rounded-4 d-flex flex-column justify-content-around">
+                    <div class="contenido__precios">
+                      <small>SALE</small>
+                      <h4>{{product.title}}</h4>
+                      <small>{{product.price.toLocaleString("en-us", {
+                        style: "currency",
+                        currency: "usd",
+                      })}}</small>
+                    </div>
+                    <div class="contenido__accion d-flex flex-column">
+                      <figure class="logo__card bg-light rounded-5">
+                        <img src="./src/assets/img/ap_studies.PNG" alt="">
+                      </figure>
+                      <span>{{product.seo}}</span>
+                      <span>{{product.lider}}</span>
+                      <div class="container_card__btn d-flex">
+                        <button class="p-2 rounded-2 border-0" data-bs-toggle="modal" data-bs-target="#exampleModal">Ver producto</button>
+                        <button class="bg-light border-0 rounded-2" @click="addToCart(product)">Agregar al Carrito</button>
                       </div>
                     </div>
-                  </div>
-                  <div class="contenedor-btn-card d-flex">
-                    <button class="bg-light border-0 p-2 m-1 rounded-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Ver producto</button>
-                    <button class="bg-light border-0 p-2 m-1 rounded-3" @click="addToCart(product)">Agregar al Carrito</button>
-                  </div>
-                </div>
-              </div>
-              <!-- Modal -->
-            <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-lg modal-content--content">
-                <div class="modal-content ">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Shop</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-producto">
-                    <!-- contenido del modad -->
-                    <div class="row">
-                      <div class="col-12 col-md-6 col-lg-6">
-                        <figure>
-                          <img src="./src/assets/img/ap_studies.PNG" alt="producto digital">
-                        </figure>
+                    <!-- Modal -->
+                 <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg modal-content--content">
+                    <div class="modal-content ">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Shop</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
-                      <div class="col-12 col-md-6 col-lg-6 d-flex flex-column p-4 justify-content-between">
-                        <small class="bg-sale p-1 fs-6 mb-1">SALE</small>
-                        <h3>{{product.title}}</h3>
-                        <div class="d-flex">
-                          <small class="mb-2" :class="product.descuento !== ''? 'text-decoration-line-through':''">$119 - </small><span v-if="product.descuento !== ''">{{product.descuento}}</span>
+                      <div class="modal-producto">
+                        <!-- contenido del modal -->
+                        <div class="row">
+                          <div class="col-12 col-md-6 col-lg-6">
+                            <figure class="figure__modal-logo">
+                              <img src="./src/assets/img/ap_studies.PNG" alt="producto digital">
+                            </figure>
+                          </div>
+                          <div class="col-12 col-md-6 col-lg-6 d-flex flex-column p-4 justify-content-between">
+                            <small class="bg-sale p-1 fs-6 mb-1">SALE</small>
+                            <h3>{{product.title}}</h3>
+                            <div class="d-flex">
+                              <small class="mb-2" :class="product.descuento !== ''? 'text-decoration-line-through':''">$119 -  </small><span v-if="product.descuento !== ''">{{product.descuento}}</span>
+                            </div>
+                            <p>Aqui va la descripcion del producto Lorem. Labore quasi aperiam aut minima quo. Soluta ea recusandae ex veniam laborum adipisci ipsa quibusdam, dolore culpa, temporibus impedit nemo alias non!</p>
+                            <button class="btn-primary" id="btnCarrito" href="#" @click="addToCart(product)">Add To Cart</button>
+                          </div>
                         </div>
-                        <p>Aqui va la descripcion del producto Lorem. Labore quasi aperiam aut minima quo. Soluta ea recusandae ex veniam laborum adipisci ipsa quibusdam, dolore culpa, temporibus impedit nemo alias non!</p>
-                        <button class="btn-carrito" id="btnCarrito" href="#" @click="addToCart(product)">Add To Cart</button>
+                        
                       </div>
                     </div>
-                    
                   </div>
                 </div>
+                <!-- modal -->
+                 </div>
+                 
+                  
               </div>
             </div>
-            <!-- modal -->
-            </div>
-            
-          </div>
+          </div> 
         </section>
       </main>
+      
       
       <footer class="text-center text-lg-start bg-white text-muted">
         <!-- Section: Social media -->
@@ -363,6 +363,8 @@
         <!-- Copyright -->
       </footer>
 
+      
+
       <!-- boton whatsapp -->
       <div class="container__btn-whatsapp">
         <a href="https://api.whatsapp.com/send?phone=51955081075&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Varela%202." target="_blank" class="efecto-btn">
@@ -382,54 +384,51 @@
               products:[
               {
                 id: "1",
-                title: "2022 Creative Digital Planner",
+                title: "Creative Digital Planner",
                 qty: 1,
                 price: 4.99,
                 descuento: '119',
                 descripcion:
-                  "Aqui va la descripcion del producto Lorem. Labore quasi aperiam aut minima quo. Soluta ea recusandae ex veniam laborum adipisci ipsa quibusdam, dolore culpa, temporibus impedit nemo alias non!",
-                logo:{
-                  avatar:'ap_studies.PNG'
-                }, 
+                  "Aqui va la descripcion del producto Lorem. Labore quasi aperiam aut minima quo. Soluta ea recusandae ex veniam laborum adipisci ipsa quibusdam, dolore culpa, temporibus impedit nemo alias non!", 
                 imgProducto: '',
                 seo: "Kira Distri",
                 lider: "Directora Planners",
               },
               {
                 id: "2",
-                title: "2022 Mom Life Digital Planner",
+                title: "Mom Life Digital Planner",
                 qty: 1,
                 price: 4.99,
                 descuento: '',
                 descripcion:
                   "Aqui va la descripcion del producto Lorem. Labore quasi aperiam aut minima quo. Soluta ea recusandae ex veniam laborum adipisci ipsa quibusdam, dolore culpa, temporibus impedit nemo alias non!",
-                logo: "ap_studies.PNG",
+                
                 imgProducto: '',
                 seo: "Kira Distri",
                 lider: "Directora Planners",
               },
               {
                 id: "3",
-                title: "2022 Mompreneur Planner",
+                title: "Mompreneur Planner",
                 qty: 1,
-                price: 4.99,
+                price: 4.88,
                 descuento: '120',
                 descripcion:
                   "Aqui va la descripcion del producto Lorem. Labore quasi aperiam aut minima quo. Soluta ea recusandae ex veniam laborum adipisci ipsa quibusdam, dolore culpa, temporibus impedit nemo alias non!",
-                logo: "ap_studies.PNG",
+                
                 imgProducto: '',
                 seo: "Kira Distri",
                 lider: "Directora Planners",
               },
               {
                 id: "4",
-                title: "2022 Mom Life Digital Planner",
+                title: "Mom Life Digital Planner",
                 qty: 1,
-                price: 4.99,
+                price: 5.6,
                 descuento: '',
                 descripcion:
                   "Aqui va la descripcion del producto Lorem. Labore quasi aperiam aut minima quo. Soluta ea recusandae ex veniam laborum adipisci ipsa quibusdam, dolore culpa, temporibus impedit nemo alias non!",
-                logo: "ap_studies.PNG",
+                
                 imgProducto: '',
                 seo: "Kira Distri",
                 lider: "Directora Planners",
@@ -438,11 +437,11 @@
                 id: "5",
                 title: "Creative Digital Planner",
                 qty: 1,
-                price: 4.99,
+                price: 10.99,
                 descuento: '119',
                 descripcion:
                   "Aqui va la descripcion del producto Lorem. Labore quasi aperiam aut minima quo. Soluta ea recusandae ex veniam laborum adipisci ipsa quibusdam, dolore culpa, temporibus impedit nemo alias non!",
-                logo: "./src/assets/img/ap_studies.PNG",
+                
                 imgProducto: 'https://i0.wp.com/craftingeek.me/wp-content/uploads/2022/07/pd-001-libreta-digital-blog-8.png?resize=2000%2C1600&ssl=1',
                 seo: "Kira Distri",
                 lider: "Directora Planners",
@@ -454,7 +453,6 @@
                 price: 4.99,
                 descuento: '',
                 descripcion:"Aqui va la descripcion del producto Lorem. Labore quasi aperiam aut minima quo. Soluta ea recusandae ex veniam laborum adipisci ipsa quibusdam, dolore culpa, temporibus impedit nemo alias non!",
-                logo: "ap_studies.PNG",
                 imgProducto: '',
                 seo: "Kira Distri",
                 lider: "Directora Planners",
@@ -477,12 +475,21 @@
               this.getTotal();
             },
             getTotal() {
-            this.total = this.products.reduce((a, b) => {
+              this.total = this.products.reduce((a, b) => {
                 return a + b.price;
               }, 0);
             },
           },
           async mounted(){
+            const btnCarrito = document.querySelector('#btnCarrito');
+            const btn_agregar = document.querySelectorAll('#btn_agregar');
+            const msj = document.querySelector('.msj-producto');
+            btnCarrito.addEventListener('click', ()=>{
+              msj.style.top = '2rem';
+              setTimeout(function() {
+                msj.style.top = '-5rem';
+              }, 3000);
+            });
             
           }}).mount("#app")
     </script>
